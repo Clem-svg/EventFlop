@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
 
   has_many :attendances
-  has_many :users through attendances
+  has_many :users, through: :attendances
   belongs_to :event_admin, class_name: "User"
 
   validates :start_date, presence: true, inclusion: { in: (Date.today..Date.today+5.years) }
