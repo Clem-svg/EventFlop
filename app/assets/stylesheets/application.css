@@ -1,7 +1,7 @@
 
  .jumbotron {
   height: 400px;
-  background-image: url("sad.jpeg");
+  background-image: url(https://images.unsplash.com/photo-1529395792713-26858d750725?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1504&q=80);
   background-position-y: 20%;
   background-repeat: no-repeat;
   background-position-x: 5%;
