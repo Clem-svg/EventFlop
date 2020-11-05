@@ -43,7 +43,7 @@
               </div>
             </button>
           <% else %>
-            <form class="nav-item dropdown ">
+            <form type="button" class="btn btn-light">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon profil</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" <%= link_to "Mon profil", user_path(current_user.id), :class => "nav-item nav-link" %></a>
