@@ -26,8 +26,8 @@ puts tp User.all
   admin = User.all.sample
   Event.create!(start_date: "2020-12-15T00:00:00+00:00", #DateTime.now + rand(1..100),
   duration: [15, 30, 45, 60, 90].sample,
-  title: ["Pikachu", "Bulbizar", "Salameche", "Carapuce", "Roucoul", "Ratata", "Chenipan"].sample,
-  description: Faker::Food.description,
+  title: Faker::TvShows::RuPaul.queen,
+  description: Faker::TvShows::RuPaul.quote + Faker::TvShows::RuPaul.quote,
   price: Faker::Number.between(from: 1, to: 1000),
   location: ["chemin Mendoza", "impasse Bariloche", "voie El Calafate", "avenue Buenos Aires", "place de Salta", "eglise El Chalten"].sample,
   event_admin: User.all.sample)
