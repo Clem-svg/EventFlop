@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show]
-  before_action :is_event_admin?, only: [:edit, :update, :destroy]
+  before_action :is_admin?, only: [:edit, :update, :destroy]
 
   def new
     @event = Event.new
@@ -27,6 +27,7 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
+
   end
 
   def update
@@ -55,11 +56,15 @@ class EventsController < ApplicationController
     post_params = params.require(:event).permit(:start_date, :title, :duration, :description, :price, :location)
   end
 
-  def is_event_admin?
+    def is_admin?
     @event = Event.find(params[:id])
-    unless is_author?(@event.event_admin)
-      redirect_to @event, danger: "Tu n'as pas créé cet event, pas touche !"
+      unless @event.event_admin == current_user
+        redirect_to @event, danger: "Vous n'êtes pas le créateur de cet évènement !!"
+      end
     end
-  end
+
+
+
+
 
 end
