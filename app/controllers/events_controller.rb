@@ -45,26 +45,32 @@ class EventsController < ApplicationController
 
   private
 
-  def authenticate_user
-    unless current_user
-      flash[:danger] = "Il faut s'enregistrer bb"
-      redirect_to new_user_session_path
+    def authenticate_user
+      unless current_user
+        flash[:danger] = "Il faut s'enregistrer bb"
+        redirect_to new_user_session_path
+      end
     end
-  end
 
-  def post_params
-    post_params = params.require(:event).permit(:start_date, :title, :duration, :description, :price, :location)
-  end
+    def post_params
+      post_params = params.require(:event).permit(:start_date, :title, :duration, :description, :price, :location)
+    end
 
     def is_admin?
     @event = Event.find(params[:id])
       unless @event.event_admin == current_user
-        redirect_to @event, danger: "Vous n'êtes pas le créateur de cet évènement !!"
+        redirect_to @event, danger: "Pas touche, c'est pas ton event !"
       end
     end
 
-
-
+    def can_subscribe?
+      @event = Event.find_by(id: params[:event_id])
+      if @event.users.select{ |user| user == current_user }.count == 0
+        return true
+      else
+        redirect_to event_path(@event), danger: "Tu es déjà inscrit !"
+      end
+  end
 
 
 end

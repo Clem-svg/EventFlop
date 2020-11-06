@@ -1,6 +1,7 @@
 <div class="container">
   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <p class="lead">Event <%=params[:id]%> : <%= @event.title %></p>
+    <h2><%= @event.attendances.count %> <%= (@event.attendances.count) == 1 ? 'Participant' : 'Participants'%></h2>
 
     <!-- GOSSIP -->
     <h6 class="font-weight-bold">Date : <span class="text-muted"><%= @event.start_date %></span></h6>
@@ -17,8 +18,10 @@
     <%= link_to "Mon espace Admin", event_attendances_path(@event.id), :class => "btn btn-lg btn-primary" %>
     <% end %>
     <% if current_user == nil %> <p class="text-danger">Tu dois être connecté.e pour t'inscrire à cet event !</p> <% end %>
-    <% if current_user != nil && current_user != @event.event_admin%> <%= link_to "Participer à cette dinguerie", new_event_attendance_path(@event.id), :class => "btn btn-lg btn-primary" %><% end %>
 
+    <% if current_user != nil && current_user != @event.event_admin%>
+          <%= link_to "Participer à cette dinguerie", new_event_attendance_path(@event.id), :class => "btn btn-lg btn-primary" %>
+      <% end %>
 
   </div>
 </div>

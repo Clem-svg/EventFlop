@@ -42,19 +42,11 @@ class AttendancesController < ApplicationController
   end
 
 
-  def can_subscribe?
-      @event = Event.find_by(id: params[:event_id])
-      if @event.users.select{ |user| user == current_user }.count == 0
-        return true
-      else
-        redirect_to event_path(@event), danger: "Tu es déjà inscrit !"
-      end
-  end
-
   def is_admin?
       @event = Event.find_by(id: params[:event_id])
       redirect_to root_path unless @event.is_admin?(current_user)
   end
+
 
   private
 
@@ -63,6 +55,8 @@ class AttendancesController < ApplicationController
     @amount = @event.price
     @stripe_amount = @amount * 100
   end
+
+
 
 
 end
