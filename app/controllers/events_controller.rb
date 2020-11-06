@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show]
+  before_action :is_event_admin?, only: [:edit, :update, :destroy]
 
   def new
     @event = Event.new
@@ -24,6 +25,23 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    if @event.update(post_params)
+      flash[:notice] = "Event édité !"
+      redirect_to event_path(@event.id)
+    else
+      flash.now[:alert] = "Impossible d'éditer l'évènement' :"
+      render :edit
+    end
+  end
+
+
+
   private
 
   def authenticate_user
@@ -35,6 +53,13 @@ class EventsController < ApplicationController
 
   def post_params
     post_params = params.require(:event).permit(:start_date, :title, :duration, :description, :price, :location)
+  end
+
+  def is_event_admin?
+    @event = Event.find(params[:id])
+    unless is_author?(@event.event_admin)
+      redirect_to @event, danger: "Tu n'as pas créé cet event, pas touche !"
+    end
   end
 
 end
