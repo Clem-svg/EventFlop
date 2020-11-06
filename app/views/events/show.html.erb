@@ -19,9 +19,14 @@
     <% end %>
     <% if current_user == nil %> <p class="text-danger">Tu dois être connecté.e pour t'inscrire à cet event !</p> <% end %>
 
-    <% if current_user != nil && current_user != @event.event_admin%>
-          <%= link_to "Participer à cette dinguerie", new_event_attendance_path(@event.id), :class => "btn btn-lg btn-primary" %>
-      <% end %>
+
+
+    <% if @event.users.select{ |user| user == current_user }.count != 0 && current_user != @event.event_admin%>
+    <p class="text-primary">Tu participes déjà à cet event ! </p>
+      <% else%>
+      <%= link_to "Participer à cette dinguerie", new_event_attendance_path(@event.id), :class => "btn btn-lg btn-primary" %>
+
+    <%end%>
 
   </div>
 </div>
