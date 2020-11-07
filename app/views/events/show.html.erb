@@ -14,16 +14,15 @@
 
 
     <br>
-    <% if current_user == @event.event_admin %> <p class="text-primary">Mazel Tov, tu es administrateur de cet event !</p>
-    <%= link_to "Mon espace Admin", event_attendances_path(@event.id), :class => "btn btn-lg btn-primary" %>
-    <% end %>
-    <% if current_user == nil %> <p class="text-danger">Tu dois être connecté.e pour t'inscrire à cet event !</p> <% end %>
-
 
 
     <% if @event.users.select{ |user| user == current_user }.count != 0 && current_user != @event.event_admin%>
-    <p class="text-primary">Tu participes déjà à cet event ! </p>
-      <% else%>
+      <p class="text-primary">Tu participes déjà à cet event ! </p>
+    <% elsif current_user == @event.event_admin %> <p class="text-primary">Mazel Tov, tu es administrateur de cet event !</p>
+      <%= link_to "Mon espace Admin", event_attendances_path(@event.id), :class => "btn btn-lg btn-primary" %>
+    <% elsif current_user == nil %> <p class="text-danger">
+      Tu dois être connecté.e pour t'inscrire à cet event !</p>
+    <% else%>
       <%= link_to "Participer à cette dinguerie", new_event_attendance_path(@event.id), :class => "btn btn-lg btn-primary" %>
 
     <%end%>
