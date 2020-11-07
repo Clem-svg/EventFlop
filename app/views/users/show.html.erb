@@ -6,7 +6,7 @@
     <!--image-->
       <div class="avatar mx-auto white">
         <h3>Votre photo actuelle</h3>
-    <%if @user.avatar.attached?%>
+    <%if @user.avatar.attached? %>
       <%= image_tag @user.avatar, alt: 'avatar', class:"rounded-circle" %>
     <%else%>
       <img src="https://picsum.photos/200" class="rounded-circle">

@@ -41,6 +41,11 @@ class EventsController < ApplicationController
     end
   end
 
+  def destroy
+    Event.find(params[:id]).destroy
+    redirect_to root_path
+  end
+
 
 
   private
@@ -53,7 +58,7 @@ class EventsController < ApplicationController
     end
 
     def post_params
-      post_params = params.require(:event).permit(:start_date, :title, :duration, :description, :price, :location)
+      post_params = params.require(:event).permit(:start_date, :title, :duration, :description, :price, :location, :picture)
     end
 
     def is_admin?

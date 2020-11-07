@@ -3,6 +3,14 @@
     <p class="lead">Event <%=params[:id]%> : <%= @event.title %></p>
     <h2><%= @event.attendances.count %> <%= (@event.attendances.count) == 1 ? 'Participant' : 'Participants'%></h2>
 
+    <!-- Picture -->
+    <%if @event.picture.attached?%>
+      <%= image_tag @event.picture, alt: 'picture' %>
+    <%else%>
+      <img src="https://picsum.photos/200" class="rounded-circle">
+    <%end%>
+
+    <br><br><br>
     <!-- GOSSIP -->
     <h6 class="font-weight-bold">Date : <span class="text-muted"><%= @event.start_date %></span></h6>
     <h6 class="font-weight-bold">Durée : <span class="text-muted"><%= @event.duration %></span></h6>

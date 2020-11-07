@@ -11,6 +11,7 @@ class Event < ApplicationRecord
   validates :price, presence: true, :inclusion => 1..1000
   validates :location, presence: true
 
+  has_one_attached :picture
 
   def multiple_of_five?
     errors.add(:duration, "La durée doit être un multiple de 5") unless duration % 5 == 0
