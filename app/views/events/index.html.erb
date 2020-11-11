@@ -1,12 +1,6 @@
 <div class="container">
-  <div class="jumbotron">
-    <div class="container">
-      <h1 class="display-3" style="color:white;" >EventFlop</h1>
-      <h3 style="color:white;">Des events hyper bof</h3>
-      <br/><br/>
-    </div>
-  </div>
 
+  <%= render "shared/jumbotron" %>
 
   <div class="row">
       <% @events.each_with_index do |event, i| %>

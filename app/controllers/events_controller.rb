@@ -19,7 +19,8 @@ class EventsController < ApplicationController
     @event.event_admin = current_user
 
     if @event.save
-      redirect_to event_path(@event.id), success: "Evénement créé avec succès !"
+      redirect_to event_path(@event.id)
+      flash[:success] = "Evénement créé avec succès !"
     else
       render :new
     end
@@ -33,8 +34,8 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     if @event.update(post_params)
-      flash[:notice] = "Event édité !"
       redirect_to event_path(@event.id)
+      flash[:notice] = "Event édité !"
     else
       flash.now[:alert] = "Impossible d'éditer l'évènement' :"
       render :edit
